@@ -216,6 +216,42 @@ Public Class frmAvancado
         End If
     End Sub
 
+    Private Sub btRetirarTextoColunaNomeVariavel_Click(sender As System.Object, e As System.EventArgs) Handles btRetirarTextoColunaNomeVariavel.Click
+        For Each r As DataRow In CType(Grid.DataSource, DataTable).Rows
+            r(vggNomesColunas.columnsInfo_Extra.NomeVariavel_Name) = r(vggNomesColunas.columnsInfo_Extra.NomeVariavel_Name).ToString.Replace(txtRetirarTextoColunaNomeVariavel.Text, "")
+        Next
+    End Sub
+
+    Private Sub btRetirarTextoColunaValorString_Click(sender As System.Object, e As System.EventArgs) Handles btRetirarTextoColunaValorString.Click
+        For Each r As DataRow In CType(Grid.DataSource, DataTable).Rows
+            r(vggNomesColunas.columnsInfo_Extra.ValorString_Name) = r(vggNomesColunas.columnsInfo_Extra.ValorString_Name).ToString.Replace(txtRetirarTextoColunaValorString.Text, "")
+        Next
+    End Sub
+
+
+#End Region
+
+#Region "Métodos e funções"
+
+    Private Sub GerirFormTipoClase()
+        Select Case vgArgs.Classtype
+
+            Case eClassType.Advanced_ColumnNames
+                grTipoDadosPretendidos.Visible = False
+                pnlRetirarTextoColunaValorString.Visible = True
+
+            Case eClassType.Advanced_ObjectClass
+                grTipoDadosPretendidos.Visible = True
+                pnlRetirarTextoColunaValorString.Visible = False
+
+        End Select
+
+        lblColunaNomeVariavel.Text = vggNomesColunas.columnsInfo_Extra.NomeVariavel_Caption
+        lblColunaValorString.Text = vggNomesColunas.columnsInfo_Extra.ValorString_Caption
+
+
+    End Sub
+
     Private Function ValidarCriacao() As Boolean
         For Each r As DataRow In CType(Grid.DataSource, DataTable).Rows
             If r(vggNomesColunas.columnsInfo_Extra.Sel) = True Then
@@ -229,26 +265,11 @@ Public Class frmAvancado
 
 #End Region
 
-#Region "Métodos e funções"
-
-    Private Sub GerirFormTipoClase()
-        Select Case vgArgs.Classtype
-
-            Case eClassType.Advanced_ColumnNames
-                grTipoDadosPretendidos.Visible = False
-
-
-            Case eClassType.Advanced_ObjectClass
-                grTipoDadosPretendidos.Visible = True
-
-        End Select
-    End Sub
-
-#End Region
-
 
 
    
 
  
+   
+   
 End Class
